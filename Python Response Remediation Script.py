@@ -25,9 +25,13 @@ def enrich_and_notify(ip):
     print(f"[Enrichment] IP: {ip} | VT: {vt_score} | AbuseIPDB: {ab_score}")
 
     # --- Conditional SOAR Action ---
-    if vt_score >= 10 or ab_score >= 90:
-        print(f"[Action] Blocking IP {ip} via firewall or SOAR API...")  # 🔁 Replace with firewall/SOAR block logic
-    else:
-        print("[Action] Alert scored below threshold. Manual review recommended.")
+   if vt_score >= 10 or ab_score >= 90:
+    requests.post(
+        "https://splunk-soar.yourdomain.com/api/playbook/run",  # 🔁 Replace with your webhook/playbook endpoint
+        headers={"Authorization": "Bearer YOUR_API_TOKEN"},
+        json={"ip": ip, "reason": "High-risk PowerShell activity"}
+    )
+    print(f"[ACTION] Splunk SOAR playbook triggered for {ip}")
+
 # Example usage
 # enrich_and_notify("8.8.8.8")  # 🔁 Replace with actual IP from detection or alert
