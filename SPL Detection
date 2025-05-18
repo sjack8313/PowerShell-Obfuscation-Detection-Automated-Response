@@ -1,0 +1,5 @@
+
+index=windows EventCode=4104 OR EventCode=4688  // ScriptBlock or Process logs
+| eval cmd=coalesce(ScriptBlockText, CommandLine)  // Combine for detection
+| where like(cmd, "%FromBase64String%") OR like(cmd, "%iex%") OR like(cmd, "%DownloadString%")  // Look for obfuscation or payload execution
+| stats count by _time, user, host, cmd
