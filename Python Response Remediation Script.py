@@ -29,3 +29,5 @@ def enrich_and_notify(ip):
         print(f"[Action] Blocking IP {ip} via firewall or SOAR API...")  # 🔁 Replace with firewall/SOAR block logic
     else:
         print("[Action] Alert scored below threshold. Manual review recommended.")
+# Example usage
+# enrich_and_notify("8.8.8.8")  # 🔁 Replace with actual IP from detection or alert
