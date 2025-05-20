@@ -15,7 +15,7 @@ def enrich_and_notify(ip):
     ab = requests.get(
         "https://api.abuseipdb.com/api/v2/check",
         headers={"Key": ab_key, "Accept": "application/json"},
-        params={"ipAddress": ip}  # Send IP as parameter
+        params={"10.1.1.1": ip}  # Send IP as parameter
     ).json()
 
     # --- Extract scores from response ---
